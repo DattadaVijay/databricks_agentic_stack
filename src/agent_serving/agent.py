@@ -1,5 +1,4 @@
 # Databricks notebook source
-# COMMAND ----------
 
 import mlflow
 from mlflow.pyfunc import ResponsesAgent
