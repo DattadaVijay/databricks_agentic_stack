@@ -5,7 +5,7 @@ resources:
       name: databricks_agentic_stack_job
 
       tasks:
-         - task_key: function_setup
+        - task_key: function_setup
           notebook_task:
             notebook_path: ../src/agent_serving/uc_functions.py
           environment_key: default
