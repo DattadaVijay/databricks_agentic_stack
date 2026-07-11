@@ -17,14 +17,19 @@ resources:
           notebook_task:
             notebook_path: ../src/agent_serving/agent.py
           environment_key: default
-          dependencies:
-            - "unitycatalog-langchain[databricks]==0.2.0"
-            - "databricks-langchain==0.5.0"
-            - "langgraph==1.2.6"
-            - "mlflow[databricks]"
+
 
 
       environments:
         - environment_key: default
           spec:
             environment_version: "5"
+                  environments:
+        - environment_key: default
+          spec:
+            environment_version: "5"
+            dependencies:
+              - "unitycatalog-langchain[databricks]==0.2.0"
+              - "databricks-langchain==0.5.0"
+              - "langgraph==1.2.6"
+              - "mlflow[databricks]"
