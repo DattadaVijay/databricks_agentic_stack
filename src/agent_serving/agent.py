@@ -103,8 +103,8 @@ with mlflow.start_run(run_name="register"):
         python_model=agent,
         pip_requirements=[
             "mlflow[databricks]>=3.1",
-            "databricks-langchain==0.5.0",
-            "unitycatalog-langchain[databricks]==0.2.0",
+            "databricks-langchain",
+            "unitycatalog-langchain[databricks]",
             "databricks-sdk",
             "langgraph==1.2.6",
             "langchain-core",

@@ -23,7 +23,7 @@ resources:
           spec:
             environment_version: "5"
             dependencies:
-              - "unitycatalog-langchain[databricks]==0.2.0"
-              - "databricks-langchain==0.5.0"
+              - "unitycatalog-langchain[databricks]"
+              - "databricks-langchain"
               - "langgraph==1.2.6"
               - "mlflow[databricks]"
