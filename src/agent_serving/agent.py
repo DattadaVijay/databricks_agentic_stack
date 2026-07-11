@@ -105,6 +105,8 @@ print(response.output[0].content)
 # COMMAND ----------
 # SECTION 6: Register to UC
 mlflow.set_registry_uri("databricks-uc")
+mlflow.end_run()
+
 
 with mlflow.start_run(run_name="register"):
     model_info = mlflow.pyfunc.log_model(
