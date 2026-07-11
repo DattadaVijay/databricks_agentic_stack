@@ -58,12 +58,13 @@ class HROpsAgent(ResponsesAgent):
     
     def predict(self, request: ResponsesAgentRequest) -> ResponsesAgentResponse:
 
-        messages = [
-            {"role": m.role, "content": m.content}
-            for m in request.messages
+        # request.input is the correct field name in current MLflow
+        input_messages = [
+            {"role": message.role, "content": message.content}
+            for message in request.input
         ]
 
-        result = graph.invoke({"messages": messages})
+        result = graph.invoke({"messages": input_messages})
         final  = result["messages"][-1].content
 
         tool_call_count = 0
@@ -71,7 +72,6 @@ class HROpsAgent(ResponsesAgent):
             if hasattr(msg, "tool_calls") and msg.tool_calls:
                 tool_call_count += 1
 
-        # log per-call metrics — visible in MLflow runs table
         mlflow.log_metric("tool_calls", tool_call_count)
         mlflow.log_metric("response_chars", len(final))
 
