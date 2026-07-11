@@ -1,5 +1,6 @@
 # Databricks notebook source
 # COMMAND ----------
+# Adding the function here for agent to use.
 %sql
 CREATE OR REPLACE FUNCTION main.default.get_employee_leave_balance(
   employee_id STRING COMMENT 'Employee ID e.g. EMP001'
