@@ -3,7 +3,6 @@
 import mlflow
 from mlflow.pyfunc import ResponsesAgent
 from mlflow.types.responses import ResponsesAgentRequest, ResponsesAgentResponse
-from mlflow.entities import SpanType
 
 from databricks_langchain import (
     ChatDatabricks,
@@ -56,8 +55,7 @@ graph = create_agent(
 # COMMAND ----------
 # SECTION 4: ResponsesAgent wrapper
 class HROpsAgent(ResponsesAgent):
-
-    @mlflow.trace(span_type=SpanType.AGENT)
+    
     def predict(self, request: ResponsesAgentRequest) -> ResponsesAgentResponse:
 
         messages = [
@@ -88,7 +86,7 @@ agent = HROpsAgent()
 from mlflow.types.responses import Message
 
 test_request = ResponsesAgentRequest(
-    messages=[Message(role="user", content="How many leave days does EMP001 have left?")]
+    input=[Message(role="user", content="How many leave days does EMP001 have?")]
 )
 response = agent.predict(test_request)
 print(response.output[-1]["content"])
