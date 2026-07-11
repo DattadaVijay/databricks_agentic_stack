@@ -22,10 +22,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: Debug env
-              run: |
-                echo "HOST is set: ${{ secrets.DATABRICKS_HOST != '' }}"
-                echo "TOKEN is set: ${{ secrets.DATABRICKS_TOKEN != '' }}"
-                databricks --version
+              run: databricks --version
 
             - name: setup databricks-cli
               uses: databricks/setup-cli@main
