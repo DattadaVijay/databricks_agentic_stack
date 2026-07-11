@@ -95,15 +95,12 @@ agent = HROpsAgent()
 # SECTION 5: Quick test before registering
 from mlflow.types.responses import Message
 
-test_request = ResponsesAgentRequest(
-    input=[Message(role="user", content="How many leave days does EMP001 have?")]
-)
 response = agent.predict({
     "input": [{"role": "user", "content": "How many leave days does EMP001 have?"}]
 })
 
 # get the text out of the response
-print(response.output[0].content[0].text)
+print(response.output[0].content)
 
 # COMMAND ----------
 # SECTION 6: Register to UC
