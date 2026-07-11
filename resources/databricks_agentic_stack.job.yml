@@ -12,19 +12,13 @@ resources:
 
         - task_key: agent_setup
           max_retries: 0
-          depends_on: 
+          depends_on:
             - task_key: function_setup
           notebook_task:
             notebook_path: ../src/agent_serving/agent.py
           environment_key: default
 
-
-
       environments:
-        - environment_key: default
-          spec:
-            environment_version: "5"
-                  environments:
         - environment_key: default
           spec:
             environment_version: "5"
