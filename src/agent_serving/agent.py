@@ -76,8 +76,12 @@ class HROpsAgent(ResponsesAgent):
         mlflow.log_metric("response_chars", len(final))
 
         return ResponsesAgentResponse(
-            output=[{"role": "assistant", "content": final}]
-        )
+            output=[{
+                "role":    "assistant",
+                "content": final,
+                "type":    "message"
+            }]
+)
 
 agent = HROpsAgent()
 
