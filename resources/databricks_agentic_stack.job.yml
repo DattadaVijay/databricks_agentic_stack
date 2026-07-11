@@ -1,0 +1,30 @@
+# The main job for databricks_agentic_stack.
+resources:
+  jobs:
+    databricks_agentic_stack_job:
+      name: databricks_agentic_stack_job
+
+      tasks:
+         - task_key: function_setup
+          notebook_task:
+            notebook_path: ../src/agent_serving/uc_functions.py
+          environment_key: default
+
+        - task_key: agent_setup
+          max_retries: 0
+          depends_on: 
+            - task_key: function_setup
+          notebook_task:
+            notebook_path: ../src/agent_serving/agent.py
+          environment_key: default
+          dependencies:
+            - "unitycatalog-langchain[databricks]==0.2.0"
+            - "databricks-langchain==0.5.0"
+            - "langgraph==1.2.6"
+            - "mlflow[databricks]"
+
+
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "5"

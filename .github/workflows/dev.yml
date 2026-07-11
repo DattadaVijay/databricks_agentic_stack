@@ -1,0 +1,37 @@
+name: Databricks Dev Deploy
+
+on:
+    pull_request:
+        branches:
+            - main
+
+    workflow_dispatch:
+
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+        steps:
+            - name: checkout_repo
+              uses: actions/checkout@v4
+
+            - name: setup databricks-cli
+              uses: databricks/cli:latest
+
+            - name: databricks bundle version
+              run: databricks --version
+
+            - name: databricks bundle validate
+              run: databricks bundle validate
+
+            - name: databricks bundle deploy
+              run: databricks bundle deploy --target dev --auto-approve
+
+
+
+
+
