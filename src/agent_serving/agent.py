@@ -54,19 +54,23 @@ graph = create_agent(
 
 # COMMAND ----------
 # SECTION 4: ResponsesAgent wrapper
+import uuid
+
 class HROpsAgent(ResponsesAgent):
-    
+
     def predict(self, request: ResponsesAgentRequest) -> ResponsesAgentResponse:
 
-        # request.input is the correct field name in current MLflow
+        # convert input messages to dicts for LangGraph
         input_messages = [
             {"role": message.role, "content": message.content}
             for message in request.input
         ]
 
+        # run the agent
         result = graph.invoke({"messages": input_messages})
         final  = result["messages"][-1].content
 
+        # count tool calls
         tool_call_count = 0
         for msg in result["messages"]:
             if hasattr(msg, "tool_calls") and msg.tool_calls:
@@ -75,13 +79,15 @@ class HROpsAgent(ResponsesAgent):
         mlflow.log_metric("tool_calls", tool_call_count)
         mlflow.log_metric("response_chars", len(final))
 
+        # use the built-in helper — handles id, type, status, content format for you
         return ResponsesAgentResponse(
-            output=[{
-                "role":    "assistant",
-                "content": final,
-                "type":    "message"
-            }]
-)
+            output=[
+                self.create_text_output_item(
+                    text=final,
+                    id=str(uuid.uuid4()),
+                )
+            ]
+        )
 
 agent = HROpsAgent()
 
@@ -92,8 +98,12 @@ from mlflow.types.responses import Message
 test_request = ResponsesAgentRequest(
     input=[Message(role="user", content="How many leave days does EMP001 have?")]
 )
-response = agent.predict(test_request)
-print(response.output[-1]["content"])
+response = agent.predict({
+    "input": [{"role": "user", "content": "How many leave days does EMP001 have?"}]
+})
+
+# get the text out of the response
+print(response.output[0].content[0].text)
 
 # COMMAND ----------
 # SECTION 6: Register to UC
