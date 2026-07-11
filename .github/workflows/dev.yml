@@ -20,7 +20,7 @@ jobs:
               uses: actions/checkout@v4
 
             - name: setup databricks-cli
-              uses: databricks/cli:latest
+              uses: databricks/setup-cli@main
 
             - name: databricks bundle version
               run: databricks --version
