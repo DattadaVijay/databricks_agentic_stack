@@ -92,34 +92,7 @@ class HROpsAgent(ResponsesAgent):
 agent = HROpsAgent()
 
 # COMMAND ----------
-# SECTION 5: Quick test before registering
-from mlflow.types.responses import Message
-
 response = agent.predict({
     "input": [{"role": "user", "content": "How many leave days does EMP001 have?"}]
 })
-
-# get the text out of the response
-print(response.output[0].content)
-
-# COMMAND ----------
-# SECTION 6: Register to UC
-mlflow.set_registry_uri("databricks-uc")
-mlflow.end_run()
-
-
-with mlflow.start_run(run_name="register"):
-    model_info = mlflow.pyfunc.log_model(
-        artifact_path="agent",
-        python_model=agent,
-        pip_requirements=[
-            "mlflow[databricks]>=3.1",
-            "databricks-langchain",
-            "unitycatalog-langchain[databricks]",
-            "databricks-sdk",
-            "langgraph==1.2.6",
-            "langchain-core",
-        ],
-        registered_model_name=f"{CATALOG}.{SCHEMA}.hr_ops_agent",
-    )
-    print(f"Registered version: {model_info.registered_model_version}")
+print(response.output[0].text)
