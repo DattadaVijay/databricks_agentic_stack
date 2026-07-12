@@ -95,4 +95,4 @@ agent = HROpsAgent()
 response = agent.predict({
     "input": [{"role": "user", "content": "How many leave days does EMP001 have?"}]
 })
-print(response.output[0].text)
+print(response.output[0].content[0].text)
