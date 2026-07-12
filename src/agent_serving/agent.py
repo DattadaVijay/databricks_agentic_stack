@@ -24,7 +24,7 @@ table_prefix = "traces"
 LLM_ENDPOINT = "databricks-meta-llama-3-3-70b-instruct"
 
 mlflow.set_experiment(
-    experiment_name="your_experiment_name",
+    experiment_name="/Users/dattada.vijay@gmail.com/hr_ops_experiment",
     trace_location=UnityCatalog(
         catalog_name=CATALOG,
         schema_name=SCHEMA,
