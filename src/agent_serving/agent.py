@@ -3,7 +3,7 @@
 import mlflow
 from mlflow.pyfunc import ResponsesAgent
 from mlflow.types.responses import ResponsesAgentRequest, ResponsesAgentResponse
-
+import UnityCatalog
 from databricks_langchain import (
     ChatDatabricks,
     UCFunctionToolkit,
@@ -17,11 +17,20 @@ from langchain.agents import create_agent
 # SECTION 1: MLflow setup
 mlflow.langchain.autolog()
 mlflow.set_tracking_uri("databricks")
-mlflow.set_experiment("/Shared/hr-ops-agent")
 
-CATALOG      = "main"
-SCHEMA       = "default"
+CATALOG = "main"
+SCHEMA = "default"
+table_prefix = "traces"
 LLM_ENDPOINT = "databricks-meta-llama-3-3-70b-instruct"
+
+mlflow.set_experiment(
+    experiment_name="your_experiment_name",
+    trace_location=UnityCatalog(
+        catalog_name=CATALOG,
+        schema_name=SCHEMA,
+        table_prefix=table_prefix,
+    )
+)
 
 # COMMAND ----------
 # SECTION 2: UC Function tools
@@ -95,4 +104,4 @@ agent = HROpsAgent()
 response = agent.predict({
     "input": [{"role": "user", "content": "How many leave days does EMP001 have?"}]
 })
-print(response.output[0]["content"][0]["text"])
+print(response.output[0].content)
