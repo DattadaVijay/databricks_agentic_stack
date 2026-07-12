@@ -3,7 +3,6 @@
 import mlflow
 from mlflow.pyfunc import ResponsesAgent
 from mlflow.types.responses import ResponsesAgentRequest, ResponsesAgentResponse
-from mlflow.entities.trace_location import UnityCatalog 
 from databricks_langchain import (
     ChatDatabricks,
     UCFunctionToolkit,
@@ -24,13 +23,7 @@ table_prefix = "traces"
 LLM_ENDPOINT = "databricks-meta-llama-3-3-70b-instruct"
 
 mlflow.set_experiment(
-    experiment_name="/Users/dattada.vijay@gmail.com/hr_ops_experiment",
-    trace_location=UnityCatalog(
-        catalog_name=CATALOG,
-        schema_name=SCHEMA,
-        table_prefix=table_prefix,
-    )
-)
+    experiment_name="/Users/dattada.vijay@gmail.com/hr_ops_experiment")
 
 # COMMAND ----------
 # SECTION 2: UC Function tools
