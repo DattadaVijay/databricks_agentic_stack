@@ -3,7 +3,6 @@
 import mlflow
 from mlflow.pyfunc import ResponsesAgent
 from mlflow.types.responses import ResponsesAgentRequest, ResponsesAgentResponse
-import UnityCatalog
 from databricks_langchain import (
     ChatDatabricks,
     UCFunctionToolkit,
