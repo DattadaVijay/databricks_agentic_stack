@@ -92,9 +92,11 @@ class HROpsAgent(ResponsesAgent):
         )
 
 agent = HROpsAgent()
+mlflow.models.set_model(agent)
 
 # COMMAND ----------
 response = agent.predict({
     "input": [{"role": "user", "content": "How many leave days does EMP001 have?"}]
 })
 print(response.output[0].content)
+
