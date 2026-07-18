@@ -37,4 +37,3 @@ resources:
               - "unitycatalog-langchain[databricks]"
               - "databricks-langchain"
               - "langgraph==1.2.6"
-              - "mlflow[databricks]"
