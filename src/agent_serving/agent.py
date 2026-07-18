@@ -5,9 +5,7 @@ from mlflow.pyfunc import ResponsesAgent
 from mlflow.types.responses import ResponsesAgentRequest, ResponsesAgentResponse
 from databricks_langchain import (
     ChatDatabricks,
-    UCFunctionToolkit,
-    DatabricksFunctionClient,
-    set_uc_function_client,
+    UCFunctionToolkit
 )
 
 from langchain.agents import create_agent
@@ -28,8 +26,6 @@ mlflow.set_experiment(
 # COMMAND ----------
 # SECTION 2: UC Function tools
 # DatabricksFunctionClient defaults to serverless execution
-client = DatabricksFunctionClient()
-set_uc_function_client(client)
 
 toolkit = UCFunctionToolkit(function_names=[
     f"{CATALOG}.{SCHEMA}.get_employee_leave_balance",
