@@ -11,16 +11,18 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        environment: Dev
         env:
-        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_AUTH_TYPE: pat
 
         steps:
             - name: checkout_repo
               uses: actions/checkout@v4
 
             - name: setup databricks-cli
-              uses: databricks/cli:latest
+              uses: databricks/setup-cli@main
 
             - name: databricks bundle version
               run: databricks --version

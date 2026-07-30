@@ -17,6 +17,7 @@ AS $$
   return emp
 $$;
 
+
 # COMMAND ----------
 %sql
 CREATE OR REPLACE FUNCTION main.default.get_department_headcount(

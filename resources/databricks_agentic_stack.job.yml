@@ -5,26 +5,35 @@ resources:
       name: databricks_agentic_stack_job
 
       tasks:
-         - task_key: function_setup
+        - task_key: function_setup
+          max_retries: 0
           notebook_task:
             notebook_path: ../src/agent_serving/uc_functions.py
           environment_key: default
 
         - task_key: agent_setup
           max_retries: 0
-          depends_on: 
+          depends_on:
             - task_key: function_setup
           notebook_task:
             notebook_path: ../src/agent_serving/agent.py
           environment_key: default
-          dependencies:
-            - "unitycatalog-langchain[databricks]==0.2.0"
-            - "databricks-langchain==0.5.0"
-            - "langgraph==1.2.6"
-            - "mlflow[databricks]"
+
+        - task_key: agent_register
+          max_retries: 0
+          depends_on:
+            - task_key: agent_setup
+          notebook_task:
+            notebook_path: ../src/agent_serving/register.py
+          environment_key: default
+
 
 
       environments:
         - environment_key: default
           spec:
             environment_version: "5"
+            dependencies:
+              - "unitycatalog-langchain[databricks]"
+              - "databricks-langchain"
+              - "langgraph==1.2.6"
