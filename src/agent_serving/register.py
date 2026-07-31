@@ -37,5 +37,3 @@ with mlflow.start_run(run_name="register_hr_ops_agent"):
     print(f"Registered: {CATALOG}.{SCHEMA}.hr_ops_agent")
     print(f"Version:    {model_info.registered_model_version}")
     print(f"URI:        {model_info.model_uri}")
-
-    # Model registered.
