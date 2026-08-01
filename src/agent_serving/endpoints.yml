@@ -1,0 +1,18 @@
+resources:
+  model_serving_endpoints:
+    hr_agent_endpoint:
+      name: hr-ops-agent-endpoint
+      tags:
+        - key: project
+          value: hr-ops-agent
+        - key: environment
+          value: dev
+        - key: owner
+          value: dattada.vijay@gmail.com
+
+      config:
+        served_entities:
+          - entity_name: main.default.hr_ops_agent
+            entity_version: 2
+            scale_to_zero_enabled: true
+            workload_size: Small
