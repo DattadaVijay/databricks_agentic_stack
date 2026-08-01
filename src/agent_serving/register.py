@@ -5,6 +5,7 @@ import os
 mlflow.set_tracking_uri("databricks")
 mlflow.set_registry_uri("databricks-uc")
 mlflow.set_experiment("/Shared/hr-ops-agent")
+from mlflow.models.resources import (DatabricksServingEndpoint, DatabricksFunction)
 
 CATALOG = "main"
 SCHEMA  = "default"
@@ -30,6 +31,11 @@ with mlflow.start_run(run_name="register_hr_ops_agent"):
             "langgraph==1.2.6",
             "langchain-core",
             "langchain",
+        ],
+        resources=[
+            DatabricksServingEndpoint(endpoint_name="databricks-meta-llama-3-3-70b-instruct"),
+            DatabricksFunction(function_name="workspace.default.get_employee_leave_balance"),
+            DatabricksFunction(function_name="workspace.default.get_department_headcount"),
         ],
         registered_model_name=f"{CATALOG}.{SCHEMA}.hr_ops_agent",
     )
