@@ -71,9 +71,6 @@ class HROpsAgent(ResponsesAgent):
             if hasattr(msg, "tool_calls") and msg.tool_calls:
                 tool_call_count += 1
 
-        mlflow.log_metric("tool_calls", tool_call_count)
-        mlflow.log_metric("response_chars", len(final))
-
         # use the built-in helper — handles id, type, status, content format for you
         return ResponsesAgentResponse(
             output=[
