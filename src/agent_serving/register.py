@@ -2,7 +2,7 @@
 
 import os
 import mlflow
-from mlflow.models.resources import DatabricksServingEndpoint, DatabricksFunction
+from mlflow.models.resources import DatabricksServingEndpoint, DatabricksFunction, DatabricksGenieSpace
 
 mlflow.set_tracking_uri("databricks")
 mlflow.set_registry_uri("databricks-uc")
@@ -43,6 +43,7 @@ with mlflow.start_run(run_name="register_hr_ops_agent"):
             DatabricksFunction(
                 function_name="main.default.get_department_headcount"
             ),
+            DatabricksGenieSpace(genie_space_id="01f18deae2f61879ab492990908453df"),
         ],
         registered_model_name=f"{CATALOG}.{SCHEMA}.hr_ops_agent",
     )
