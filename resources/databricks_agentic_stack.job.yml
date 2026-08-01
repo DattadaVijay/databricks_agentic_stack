@@ -18,6 +18,8 @@ resources:
 
         - task_key: agent_registration
           max_retries: 0
+          depends_on:
+            - task_key: agent_code
           notebook_task:
             notebook_path: ../src/agent_serving/register.py
           environment_key: default
