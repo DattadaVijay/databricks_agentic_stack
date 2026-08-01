@@ -3,6 +3,10 @@ resources:
   jobs:
     databricks_agentic_stack_job:
       name: databricks_agentic_stack_job
+      tags:
+        team: data-engineering
+        project: hr-ops-agent
+        owner: dattada.vijay@gmail.com
 
       tasks:
         - task_key: function_setup

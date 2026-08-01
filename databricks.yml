@@ -4,7 +4,6 @@ bundle:
   name: databricks_agentic_stack
   uuid: 815d16e2-5f08-4934-9523-f9506a6773d5
 
-
 include:
   - resources/*.yml
   - resources/*/*.yml
