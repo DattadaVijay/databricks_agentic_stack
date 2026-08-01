@@ -5,6 +5,6 @@ resources:
       config:
         served_entities:
           - entity_name: main.default.hr_ops_agent
-            entity_version: "2"
+            entity_version: "champion"
             scale_to_zero_enabled: true
             workload_size: Small
