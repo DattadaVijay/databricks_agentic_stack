@@ -13,15 +13,12 @@ from langchain.agents import create_agent
 # COMMAND ----------
 # SECTION 1: MLflow setup
 mlflow.langchain.autolog()
-mlflow.set_tracking_uri("databricks")
 
 CATALOG = "main"
 SCHEMA = "default"
 table_prefix = "traces"
 LLM_ENDPOINT = "databricks-meta-llama-3-3-70b-instruct"
 
-mlflow.set_experiment(
-    experiment_name="/Users/dattada.vijay@gmail.com/hr_ops_experiment")
 
 # COMMAND ----------
 # SECTION 2: UC Function tools
@@ -89,10 +86,4 @@ class HROpsAgent(ResponsesAgent):
 
 agent = HROpsAgent()
 mlflow.models.set_model(agent)
-
-# COMMAND ----------
-response = agent.predict({
-    "input": [{"role": "user", "content": "How many leave days does EMP001 have?"}]
-})
-print(response.output[0].content)
 
