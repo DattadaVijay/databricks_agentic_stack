@@ -9,7 +9,7 @@ resources:
         owner: dattada.vijay@gmail.com
 
       tasks:
-        - task_key: function_setup
+        {# - task_key: function_setup
           max_retries: 0
           notebook_task:
             notebook_path: ../src/agent_serving/uc_functions.py
@@ -29,7 +29,15 @@ resources:
             - task_key: agent_setup
           notebook_task:
             notebook_path: ../src/agent_serving/register.py
+          environment_key: default #}
+
+        - task_key: agent_eval
+          max_retries: 0
+          notebook_task:
+            notebook_path: ../src/agent_serving/eval.py
           environment_key: default
+
+
 
 
 
