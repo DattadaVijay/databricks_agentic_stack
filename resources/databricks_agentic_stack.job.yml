@@ -10,10 +10,10 @@ resources:
 
       tasks:
 
-        - task_key: agent_eval
+        - task_key: agent
           max_retries: 0
           notebook_task:
-            notebook_path: ../src/agent_serving/eval.py
+            notebook_path: ../src/agent_serving/agent.py
           environment_key: default
 
       environments:

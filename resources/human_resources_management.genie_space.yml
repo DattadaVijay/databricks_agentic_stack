@@ -1,0 +1,7 @@
+resources:
+  genie_spaces:
+    human_resources_management:
+      title: "Human Resources Management"
+      warehouse_id: ece081f3bd7cb8a7
+      file_path: ../src/human_resources_management.geniespace.json
+      parent_path: /Workspace/Users/dattada.vijay@gmail.com

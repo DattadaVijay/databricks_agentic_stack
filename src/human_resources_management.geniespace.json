@@ -1,0 +1,59 @@
+{
+  "data_sources": {
+    "tables": [
+      {
+        "column_configs": [
+          {
+            "column_name": "department",
+            "enable_entity_matching": true,
+            "enable_format_assistance": true
+          },
+          {
+            "column_name": "employee_id",
+            "enable_format_assistance": true
+          },
+          {
+            "column_name": "is_active",
+            "enable_format_assistance": true
+          },
+          {
+            "column_name": "leave_total",
+            "enable_format_assistance": true
+          },
+          {
+            "column_name": "leave_used",
+            "enable_format_assistance": true
+          },
+          {
+            "column_name": "name",
+            "enable_entity_matching": true,
+            "enable_format_assistance": true
+          },
+          {
+            "column_name": "role",
+            "enable_entity_matching": true,
+            "enable_format_assistance": true
+          },
+          {
+            "column_name": "salary",
+            "enable_format_assistance": true
+          }
+        ],
+        "identifier": "main.default.hr_employees"
+      }
+    ]
+  },
+  "instructions": {
+    "text_instructions": [
+      {
+        "content": [
+          "Always filter is_active = true unless the user explicitly asks about inactive employees.\n",
+          "Salary values are in CAD. Always mention the currency when reporting salary figures.\n",
+          "When asked about remaining leave, calculate it as leave_total minus leave_used."
+        ],
+        "id": "01f18deb0e0f14c18373f8a6a5989586"
+      }
+    ]
+  },
+  "version": 2
+}
