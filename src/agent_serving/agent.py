@@ -37,11 +37,14 @@ tools = toolkit.tools
 
 @tool
 def query_hr_genie(question: str) -> str:
-    """ Ask the HR Analytics Genie a natural language question about
-    employee data across the whole company. Use this for analytical
-    questions — average salary by department, headcount trends,
-    who has the most leave remaining, salary distributions.
-    Do NOT use this for one specific employee lookup. """
+    """     ALWAYS use this tool when the user asks any question about:
+    - salary (average, distribution, by department, by role)
+    - headcount or number of employees across departments
+    - who has the most or least leave remaining
+    - trends or comparisons across multiple employees
+    - any aggregate or analytical question about the HR database
+    This tool queries the HR employee database using natural language.
+    Do NOT use for looking up one specific employee by ID. """
 
     response = w.genie.start_conversation_and_wait(
     space_id="01f18deae2f61879ab492990908453df",
