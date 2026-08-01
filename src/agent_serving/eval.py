@@ -96,7 +96,7 @@ def predict_fn(inputs):
         inputs=inputs,
     )
     # extract the text from the response
-    return response["output"][0]["content"][0]["text"]
+    return response.output[0].content[0].text
 
 # COMMAND ----------
 # SECTION 5: Run evaluation
@@ -108,7 +108,7 @@ with mlflow.start_run(run_name="hr_agent_eval_v1"):
 
     results = mlflow.genai.evaluate(
         data=eval_data,
-        predict_fn=lambda row: predict_fn(row["inputs"]),
+        predict_fn=lambda inputs: predict_fn(inputs),
         scorers=all_scorers,
     )
 
