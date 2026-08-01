@@ -7,8 +7,13 @@ from databricks_langchain import (
     ChatDatabricks,
     UCFunctionToolkit
 )
+from langchain_core.tools import tool
 
 from langchain.agents import create_agent
+
+from databricks.sdk import WorkspaceClient
+
+w = WorkspaceClient()
 
 # COMMAND ----------
 # SECTION 1: MLflow setup
@@ -29,6 +34,25 @@ toolkit = UCFunctionToolkit(function_names=[
     f"{CATALOG}.{SCHEMA}.get_department_headcount",
 ])
 tools = toolkit.tools
+
+@tool
+def query_hr_genie(question: str) -> str:
+    """ Ask the HR Analytics Genie a natural language question about
+    employee data across the whole company. Use this for analytical
+    questions — average salary by department, headcount trends,
+    who has the most leave remaining, salary distributions.
+    Do NOT use this for one specific employee lookup. """
+
+    response = w.genie.start_conversation_and_wait(
+    space_id="01f18deae2f61879ab492990908453df",
+    content=question)
+
+    result = ""
+    for attachment in response.attachments:
+        if attachment.text and attachment.text.content:
+            result += attachment.text.content + "\n"
+    return result
+
 
 # COMMAND ----------
 # SECTION 3: Agent

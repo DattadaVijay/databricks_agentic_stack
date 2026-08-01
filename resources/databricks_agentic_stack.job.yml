@@ -10,12 +10,19 @@ resources:
 
       tasks:
 
-        - task_key: agent
+        - task_key: agent_code
           max_retries: 0
           notebook_task:
             notebook_path: ../src/agent_serving/agent.py
           environment_key: default
 
+        - task_key: agent_registration
+          max_retries: 0
+          notebook_task:
+            notebook_path: ../src/agent_serving/register.py
+          environment_key: default
+
+        
       environments:
         - environment_key: default
           spec:
@@ -24,3 +31,4 @@ resources:
               - "unitycatalog-langchain[databricks]"
               - "databricks-langchain"
               - "langgraph==1.2.6"
+              - "langchain-core"
