@@ -38,14 +38,3 @@ with mlflow.start_run(run_name="register_hr_ops_agent"):
     print(f"Version:    {model_info.registered_model_version}")
     print(f"URI:        {model_info.model_uri}")
 
-# COMMAND ----------
-
-from mlflow import MlflowClient
-
-client = MlflowClient(registry_uri="databricks-uc")
-client.set_registered_model_alias(
-    name="main.default.hr_ops_agent",
-    alias="champion",
-    version=model_info.registered_model_version
-)
-print(f"Alias 'champion' set to version {model_info.registered_model_version}")
