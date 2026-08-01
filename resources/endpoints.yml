@@ -7,8 +7,6 @@ resources:
           value: hr-ops-agent
         - key: environment
           value: dev
-        - key: owner
-          value: dattada.vijay@gmail.com
 
       config:
         served_entities:
