@@ -35,6 +35,7 @@ toolkit = UCFunctionToolkit(function_names=[
 ])
 tools = toolkit.tools
 
+
 @tool
 def query_hr_genie(question: str) -> str:
     """     ALWAYS use this tool when the user asks any question about:
@@ -56,7 +57,7 @@ def query_hr_genie(question: str) -> str:
             result += attachment.text.content + "\n"
     return result
 
-
+tools = tools + [query_hr_genie]
 # COMMAND ----------
 # SECTION 3: Agent
 # create_agent replaces create_react_agent
@@ -67,10 +68,12 @@ graph = create_agent(
     llm,
     tools,
     system_prompt=(
-        "You are an HR Operations assistant. "
-        "Use get_employee_leave_balance for one employee's leave. "
-        "Use get_department_headcount for team size questions. "
-        "Be concise. Never invent data."
+    "You are an HR Operations assistant. "
+    "Use get_employee_leave_balance for one employee's leave balance. "
+    "Use get_department_headcount for team size and open roles. "
+    "Use query_hr_genie for ANY analytical question across many employees — "
+    "salary averages, headcount trends, top earners, leave statistics. "
+    "Be concise. Never invent data."
     ),
 )
 
