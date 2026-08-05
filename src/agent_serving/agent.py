@@ -11,9 +11,6 @@ from langchain_core.tools import tool
 
 from langchain.agents import create_agent
 
-from databricks.sdk import WorkspaceClient
-
-w = WorkspaceClient()
 
 # COMMAND ----------
 # SECTION 1: MLflow setup
@@ -46,6 +43,9 @@ def query_hr_genie(question: str) -> str:
     - any aggregate or analytical question about the HR database
     This tool queries the HR employee database using natural language.
     Do NOT use for looking up one specific employee by ID. """
+
+    from databricks.sdk import WorkspaceClient  # import inside too
+    w = WorkspaceClient()   
 
     response = w.genie.start_conversation_and_wait(
     space_id="01f18deae2f61879ab492990908453df",
