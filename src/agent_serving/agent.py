@@ -38,7 +38,7 @@ tools = toolkit.tools
 
 @tool
 def query_hr_genie(question: str) -> str:
-    """     ALWAYS use this tool when the user asks any question about:
+    """ ALWAYS use this tool when the user asks any question about:
     - salary (average, distribution, by department, by role)
     - headcount or number of employees across departments
     - who has the most or least leave remaining
